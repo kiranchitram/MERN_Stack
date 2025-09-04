@@ -19,11 +19,10 @@ const allowedOrigins = ['https://mern-stack-frontend-20rj.onrender.com']
 
 
 app.use(express.json());
-//app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-//this 4 lines  is added chtgpt
 
 
 
