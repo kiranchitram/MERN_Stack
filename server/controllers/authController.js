@@ -28,7 +28,7 @@ export const register = async (req, res)=>{
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, 
             { expiresIn: '7d'});
 //this 5 lines of code added
-       res.cookie('token', accessToken, {
+       res.cookie('token', token, {
   httpOnly: true,
   secure: true, // Required for HTTPS
   sameSite: 'Strict', // Or 'None' if cross-site
