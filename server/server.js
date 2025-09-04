@@ -25,13 +25,6 @@ app.use(cookieParser());
 
 //this 4 lines  is added chtgpt
 
-res.cookie('token', accessToken, {
-  httpOnly: true,
-  secure: true, // Required for HTTPS
-  sameSite: 'Strict', // Or 'None' if cross-site
-});
-
-
 
 
 //app.use(helmet());  
@@ -43,6 +36,9 @@ app.use(cors({
 app.get('/',(req,res)=>res.send("API Working Fine"));
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+
+
+
 
 /*// 🧯 404 Handler
 app.use((req, res) => {
