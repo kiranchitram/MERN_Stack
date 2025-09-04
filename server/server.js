@@ -23,6 +23,17 @@ app.use(express.json());
 
 app.use(cookieParser());
 
+//this 4 lines  is added chtgpt
+
+res.cookie('token', accessToken, {
+  httpOnly: true,
+  secure: true, // Required for HTTPS
+  sameSite: 'Strict', // Or 'None' if cross-site
+});
+
+
+
+
 //app.use(helmet());  
 app.use(cors({
   origin: allowedOrigins,
