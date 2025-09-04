@@ -12,15 +12,15 @@ export const AppContextProvider =(props)=>{
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const[isLoggedin, setIsLoggedin] = useState(false)
-    const[userData, setUserData] = useState(false)
+    const[userData, setUserData] = useState(null)
 
 
     const getAuthState = async ()=>{
         try {
-            const {data} = await axios.get(backendUrl + '/api/auth/is-auth',{ withCredentials: true });
+            const {data} = await axios.get(backendUrl + '/api/auth/is-auth');
             if(data.success){
                 setIsLoggedin(true)
-                getUserData()
+                await getUserData();
             }
 
         } catch (error) {
