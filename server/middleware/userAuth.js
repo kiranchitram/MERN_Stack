@@ -7,7 +7,7 @@ const userAuth = async (req, res, next) => {
   const {token}  = req.cookies;
 
   if (!token) {
-    return res.json({
+    return res.status(401).json({
       success: false,
       message: "Not Authorized. Login Again",
     })
@@ -22,16 +22,16 @@ const userAuth = async (req, res, next) => {
      
     
     } else {
-      return res.json({
+      return res.status(401).json({
         success: false,
-        message: "Not Authorized.... Login Again",
+        message: "Invalid  token.. Login Again",
       });
     }
      next();
     
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
+    console.error("JWT verification failed",error);
+    return res.status(401).json({ success: false, message: error.message });
     
   }
   
