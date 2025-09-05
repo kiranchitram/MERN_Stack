@@ -15,11 +15,11 @@ const app=express();
 const port=process.env.PORT || 4000
 connectDB();
 
-const allowedOrigins = ['https://mern-stack-frontend-20rj.onrender.com']
+const allowedOrigins = ['https://mern-stack-frontend-3vlb.onrender.com']
 
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
