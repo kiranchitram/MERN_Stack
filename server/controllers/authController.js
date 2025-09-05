@@ -27,19 +27,20 @@ export const register = async (req, res)=>{
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, 
             { expiresIn: '7d'});
-//this 5 lines of code added
-       res.cookie('token', token, {
-  httpOnly: true,
-  secure: true, // Required for HTTPS
-  sameSite: 'Strict', // Or 'None' if cross-site
-}); 
+        //this 5 lines of code added
+           res.cookie('token', token, {
+              httpOnly: true,
+              secure: true, // Required for HTTPS
+              sameSite: 'Strict', // Or 'None' if cross-site
+            maxAge: 7 * 24 * 60 * 60 * 1000
+            }); 
             //sending welcome email
             const mailOptions = {
                 from: process.env.SENDER_EMAIL,
                 to: email,
                 subject: 'Welcome to KIRAN CHITRAM Developed Application ',
-                text: `Hey ${name} ,Welcome to Kiran Chitram developed web site... Your account created successfull with email id: ${email}..
-                Have a Great Day..`
+                text: `Hello, ${name} ,Welcome to Kiran Chitram developed web site... Your account created successfull with email id: ${email}..
+                Have a Great Day..😍`
             }
             await transporter.sendMail(mailOptions);
 
@@ -70,13 +71,21 @@ export const login =async (req, res)=>{
         }
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, 
             { expiresIn: '7d'});
+
+        //this 5 lines of code added
+           res.cookie('token', token, {
+          httpOnly: true,
+          secure: true, // Required for HTTPS
+          sameSite: 'Strict', // Or 'None' if cross-site
+           maxAge: 7 * 24 * 60 * 60 * 1000     
+            }); 
             
-        res.cookie('token', token, 
+      /*  res.cookie('token', token, 
             { httpOnly: true,
              secure: process.env.NODE_ENV === 'production',
              sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict' ,
              maxAge: 7 * 24 * 60 * 60 * 1000 
-            }); 
+            }); */ 
             
             return res.json({success:true});
   
