@@ -31,8 +31,7 @@ export const register = async (req, res)=>{
            res.cookie('token', token, {
               httpOnly: true,
               secure: true, // Required for HTTPS
-              sameSite: 'Strict', // Or 'None' if cross-site
-            maxAge: 7 * 24 * 60 * 60 * 1000
+              sameSite: 'none', // Or 'None' if cross-site
             }); 
             //sending welcome email
             const mailOptions = {
@@ -76,8 +75,7 @@ export const login =async (req, res)=>{
            res.cookie('token', token, {
           httpOnly: true,
           secure: true, // Required for HTTPS
-          sameSite: 'Strict', // Or 'None' if cross-site
-           maxAge: 7 * 24 * 60 * 60 * 1000     
+          sameSite: 'none', // Or 'None' if cross-site   
             }); 
             
       /*  res.cookie('token', token, 
