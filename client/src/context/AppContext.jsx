@@ -19,7 +19,7 @@ const token= localStorage.getItem("token");
         try {
             const {data} = await axios.get(backendUrl + '/api/auth/is-auth',{
                 headers:{
-                    Authoriization:'Bearer ${token}',
+                    Authoriization:`Bearer ${token}`,
                 },
             });
             if(data.success){
