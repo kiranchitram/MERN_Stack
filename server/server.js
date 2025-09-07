@@ -28,8 +28,7 @@ app.use(cookieParser());
 
 //app.use(helmet());  
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true}));
+  origin: allowedOrigins}));
 
 // API Endpoints
 app.get('/',(req,res)=>res.send("API Working Fine"));
