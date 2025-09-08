@@ -8,12 +8,12 @@ export const AppContent = createContext()
 
 export const AppContextProvider =(props)=>{
 
-   // axios.defaults.withCredentials =true ;
+   axios.defaults.withCredentials =true ;
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const[isLoggedin, setIsLoggedin] = useState(false)
     const[userData, setUserData] = useState(false)
-    axios.defaults.withCredentials =true ; 
+   
     const getAuthState = async ()=>{
         try {
             const {data} = await axios.get(backendUrl + '/api/auth/is-auth')
