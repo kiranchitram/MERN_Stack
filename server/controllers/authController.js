@@ -27,12 +27,14 @@ export const register = async (req, res)=>{
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, 
             { expiresIn: '7d'});
-        //this 5 lines of code added
-           res.cookie('token', token, {
-              httpOnly: true,
-              secure: true, // Required for HTTPS
-              sameSite: 'none', // Or 'None' if cross-site
+
+            res.cookie('token', token, 
+            {httpOnly: true,
+             secure : process.env.NODE_ENV === 'production',
+             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict' ,
+             maxAge: 7 * 24 * 60 * 60 * 1000 
             }); 
+        
             //sending welcome email
             const mailOptions = {
                 from: process.env.SENDER_EMAIL,
@@ -70,20 +72,13 @@ export const login =async (req, res)=>{
         }
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, 
             { expiresIn: '7d'});
-
-        //this 5 lines of code added
-           res.cookie('token', token, {
-          httpOnly: true,
-          secure: true, // Required for HTTPS
-          sameSite: 'none', // Or 'None' if cross-site   
-            }); 
             
-      /*  res.cookie('token', token, 
+            res.cookie('token', token, 
             { httpOnly: true,
              secure: process.env.NODE_ENV === 'production',
              sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict' ,
              maxAge: 7 * 24 * 60 * 60 * 1000 
-            }); */ 
+            }); 
             
             return res.json({success:true});
   
