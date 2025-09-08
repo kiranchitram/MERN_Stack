@@ -182,7 +182,8 @@ export const verifyEmail = async (req, res) => {
 
 //check if user is authenticated
 export const isAuthenticated = async(req, res)=>{
-  //  const { userId } = req.body;
+    var userId = req.params.id;
+  const { userId } = req.body;
     try{
          return res.json({success:true});
     }catch(error){
