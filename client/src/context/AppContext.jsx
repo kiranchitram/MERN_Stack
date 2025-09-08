@@ -24,6 +24,7 @@ export const AppContextProvider =(props)=>{
 
         } catch (error) {
             toast.error(error.message)
+           console.log("error is", error);
         }
     }
 
