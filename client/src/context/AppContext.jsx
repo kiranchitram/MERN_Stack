@@ -16,14 +16,14 @@ export const AppContextProvider =(props)=>{
    
     const getAuthState = async ()=>{
         try {
-            const {data} = await axios.get('/api/auth/is-auth')
+            const {data} = await axios.get(backendUrl + '/api/auth/is-auth')
             if(data.success){
                 setIsLoggedin(true)
                 getUserData()
             }
 
         } catch (error) {
-            toast.error(error.message)
+            //toast.error(error.message)
            console.log("error is", error);
         }
     }
