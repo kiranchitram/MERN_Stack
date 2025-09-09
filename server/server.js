@@ -15,7 +15,7 @@ const app=express();
 const port=process.env.PORT || 4000
 connectDB();
 
-const allowedOrigins = ['https://mern-stack-frontend-3vlb.onrender.com']
+//const allowedOrigins = ['https://mern-stack-frontend-3vlb.onrender.com']
 
 
 app.use(express.json());
@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 //app.use(helmet());  
 app.use(cors({
-  origin: allowedOrigins,
+  origin: 'https://mern-stack-frontend-3vlb.onrender.com',
   credentials: true}));
 
 // API Endpoints
