@@ -47,7 +47,7 @@ const EmailVerify = () => {
 
           if(data.success){
             toast.success(data.message)
-            {getuserData}
+            getuserData()
             navigate('/')
           }else{
             toast.error(data.message)
