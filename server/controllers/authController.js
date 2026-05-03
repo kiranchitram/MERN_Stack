@@ -28,20 +28,19 @@ export const register = async (req, res)=>{
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, 
             { expiresIn: '7d'});
 
-            res.cookie('token', token, 
+        res.cookie('token', token, 
             {httpOnly: true,
-             secure : true,
-             sameSite: 'None' ,
+             secure : process.env.NODE_ENV === 'production',
+             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict' ,
              maxAge: 7 * 24 * 60 * 60 * 1000 
-            }); 
-        
+            });  
             //sending welcome email
             const mailOptions = {
                 from: process.env.SENDER_EMAIL,
                 to: email,
                 subject: 'Welcome to KIRAN CHITRAM Developed Application ',
-                text: `Hello, ${name} ,Welcome to Kiran Chitram developed web site... Your account created successfull with email id: ${email}..
-                Have a Great Day..😍`
+                text: `Hey ${name} ,Welcome to Kiran Chitram developed web site... Your account created successfull with email id: ${email}..
+                Have a Great Day..`
             }
             await transporter.sendMail(mailOptions);
 
@@ -73,10 +72,10 @@ export const login =async (req, res)=>{
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, 
             { expiresIn: '7d'});
             
-            res.cookie('token', token, 
+        res.cookie('token', token, 
             { httpOnly: true,
-             secure: true,
-             sameSite: 'None',
+             secure: process.env.NODE_ENV === 'production',
+             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict' ,
              maxAge: 7 * 24 * 60 * 60 * 1000 
             }); 
             
@@ -111,9 +110,9 @@ export const logout = async (req, res)=>{
 
 export const sendVerifyOtp = async (req, res) => {
     try {
-        const { userId } = req.body;
+        //const { userId } = req.body;
 
-        const user = await userModel.findById(userId);
+        const user = await userModel.findById(req.params.id);
         
         if (user.isAccountVerified) {
             return res.json({ success: false, message: "Account already verified" })
@@ -145,14 +144,14 @@ export const sendVerifyOtp = async (req, res) => {
 
 
 export const verifyEmail = async (req, res) => {
-    const {userId, otp } = req.body;
+    const { otp } = req.body;
 
-    if (!userId || !otp) {
+    if (!otp) {
         return res.json({ success: false, message: 'Missing details' });
     }
 
     try {
-        const user = await userModel.findById(userId);
+        const user = await userModel.findById(req.params.id);
 
         if (!user) {
             return res.json({ success: false, message: 'User not found' });
@@ -182,13 +181,11 @@ export const verifyEmail = async (req, res) => {
 
 //check if user is authenticated
 export const isAuthenticated = async(req, res)=>{
- 
-  const {userId} = req.body;
+  //  const { userId } = req.body;
     try{
-        return res.json({success:true});
+         return res.json({success:true});
     }catch(error){
         res.json({success: false,message: error.message});
-        console.log("error in isauthenticated",error)
     }
 };
 
