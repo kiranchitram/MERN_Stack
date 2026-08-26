@@ -4,7 +4,7 @@ export const getUserData = async (req,res)=>{
     try{
         //const {userId} = req.query;
 
-        const userrrr = await userModel.findById(req.params.id);
+        const user = await userModel.findById(req.params.id);
         if(!user){
             return res.json({success: false, message: 'User not Found'});
         }
