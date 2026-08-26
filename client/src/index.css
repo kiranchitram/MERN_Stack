@@ -5,7 +5,8 @@
 @tailwindcss utilities; */
 
 *{
- font-family: "Outfit", sans-serif; 
+ font-family: "Outfit", sans-serif;
+ text-size: "small";
 }
 
 
