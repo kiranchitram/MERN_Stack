@@ -4,7 +4,7 @@ import userModel from '../models/userModel.js';
 import transporter from '../config/nodemailer.js';
 import { EMAIL_VERIFY_TEMPLATE, PASSWORD_RESET_TEMPLATE } from '../config/emailTemplates.js';
 
-export const registerrrrr = async (req, res)=>{
+export const register = async (req, res)=>{
     const {name, email, password} =req.body;
 //if name  email password is not available
     if(!name || !email || !password){
